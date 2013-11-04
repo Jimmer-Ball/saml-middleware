@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<saml:Assertion
+  xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  ID="Assertion12345789"
+  IssueInstant="2009-07-15T15:43:41.531Z"
+  Version="2.0"
+>
+  <saml:Issuer>http://mycom.com/MyJavaAttributeService</saml:Issuer>
+  <Signature
+    xmlns="http://www.w3.org/2000/09/xmldsig#"
+  >
+    <SignedInfo>
+      <CanonicalizationMethod
+        Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"
+      />
+      <SignatureMethod
+        Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+      />
+      <Reference
+        URI="#Assertion12345789"
+      >
+        <Transforms>
+          <Transform
+            Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          />
+        </Transforms>
+        <DigestMethod
+          Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"
+        />
+        <DigestValue>wVw/XgR+V737dN1Onm0VQFR2aNc=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>t8c6L9o7Vlg3EZjOoYahCZ/u29JcWqDUl+C3kpnVBRBsCXcfPNNah9jnSuwlDhi5mv08ew46Rezp
+raiQukEq+ElXp7LDm6k5DH/J/Dx0JUXoYsaBQ2t37X2rlNJvMlcRya73AE3g/G/0nQ/xMLowFw+2
+KrHVAbOOXRvdriXjydM=</SignatureValue>
+    <KeyInfo>
+      <X509Data>
+        <X509Certificate>MIIBoTCCAQqgAwIBAgIESlTbVTANBgkqhkiG9w0BAQUFADAVMRMwEQYDVQQDEwpDQyBTdHVkZW50
+MB4XDTA5MDcwODE3NDU1N1oXDTA5MTAwNjE3NDU1N1owFTETMBEGA1UEAxMKQ0MgU3R1ZGVudDCB
+nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA4unrfZjhavfYMe+w2x0UhM7pSooahpM9ON8gPxoU
+f2KhwnffsaRhwQqjru9PyTtUOCR/SYW+331OCSe/OzemG2fscYTP+D1u3UhSniigj56pB9q1Zv3f
+BfR11LY1D1mlt5roRzCHjRXPtVd0cwdltW8/BlYyQvNuiA1Q9fWDZ4cCAwEAATANBgkqhkiG9w0B
+AQUFAAOBgQCxBBBhP6lpFuw26q3zqRSeB14/EZNkY8gQ70kGQ0iZEzBFy3GuseK5l8/Nt5vFcKVr
+4hYo8OAjZhpDoG4ft4GUs4yR4aqlaB4xc2liHlHtDtORTl6OqFkYia3sTZaDn9ebd9td/v0xrV8u
+lAXPKfKs/Rld0Rfx35ScwEo9GuNvEQ==</X509Certificate>
+      </X509Data>
+    </KeyInfo>
+  </Signature>
+  <saml:Subject>
+    <saml:NameID
+      Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+    >ga489Slge8+0nio9=</saml:NameID>
+  </saml:Subject>
+  <saml:AttributeStatement>
+    <saml:Attribute
+      Name="FullName"
+    >
+      <saml:AttributeValue>William Whitford Provost</saml:AttributeValue>
+    </saml:Attribute>
+    <saml:Attribute
+      Name="JobTitle"
+    >
+      <saml:AttributeValue>Grand Poobah</saml:AttributeValue>
+    </saml:Attribute>
+  </saml:AttributeStatement>
+</saml:Assertion>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<samlp:Response
+  xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+  ID="_6e66a1f39beba0e86fa976d54c2e1e0d"
+  InResponseTo="AuthnQuery12345789"
+  IssueInstant="2009-07-15T15:47:40.015Z"
+  Version="2.0"
+>
+  <saml:Issuer
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  >http://somecom.com/SomeJavaAssertingParty</saml:Issuer>
+  <samlp:Status>
+    <samlp:StatusCode
+      Value="urn:oasis:names:tc:SAML:2.0:status:Success"
+    />
+  </samlp:Status>
+  <saml:Assertion
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    ID="Assertion12345789"
+    IssueInstant="2009-07-15T15:47:39.812Z"
+    Version="2.0"
+  >
+    <saml:Issuer>http://mycom.com/MyJavaAuthnService</saml:Issuer>
+    <saml:Subject>
+      <saml:NameID>harold_dt</saml:NameID>
+    </saml:Subject>
+    <saml:AuthnStatement>
+      <saml:AuthnContext>
+        <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</saml:AuthnContextClassRef>
+      </saml:AuthnContext>
+    </saml:AuthnStatement>
+  </saml:Assertion>
+</samlp:Response>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<saml:Assertion
+  xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  ID="Assertion12345789"
+  IssueInstant="2009-07-15T15:44:14.875Z"
+  Version="2.0"
+>
+  <saml:Issuer>http://mycom.com/MyJavaAuthorizationService</saml:Issuer>
+  <saml:Subject>
+    <saml:NameID
+      Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+    >ga489Slge8+0nio9=</saml:NameID>
+  </saml:Subject>
+  <saml:AuthzDecisionStatement
+    Decision="Permit"
+    Resource="http://mycom.com/Repository/Private"
+  >
+    <saml:Action
+      Namespace="urn:oasis:names:tc:SAML:1.0:action:rwedc"
+    >read</saml:Action>
+  </saml:AuthzDecisionStatement>
+</saml:Assertion>
+

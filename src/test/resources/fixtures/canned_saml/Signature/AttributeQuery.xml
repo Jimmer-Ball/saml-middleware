@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><samlp:AttributeQuery xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="AttrQuery12345789" IssueInstant="2009-07-15T15:48:16.421Z" Version="2.0">
+  <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">http://somecom.com/SomeJavaRelyingParty</saml:Issuer><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#AttrQuery12345789"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>I4k+NTFmvUA+Ra4+0vYg2X+RAic=</DigestValue></Reference></SignedInfo><SignatureValue>N3MZzMEvhjCu97nXI2VGxbDUOhz/9mSksr2d/cIeV3nkVLrvv6e4Te2a5xcrKzcuBVLLTHW6qwdH
+qFqOg9uziNyXQKObari/E2iYj4GEiwfpzzwV+SPqwXO9v0kX863MehRwyJha3c3aUYWRYEf2TBRi
+rtNLm6FXXUXCboZJ1/4=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIBoTCCAQqgAwIBAgIESlTbVTANBgkqhkiG9w0BAQUFADAVMRMwEQYDVQQDEwpDQyBTdHVkZW50
+MB4XDTA5MDcwODE3NDU1N1oXDTA5MTAwNjE3NDU1N1owFTETMBEGA1UEAxMKQ0MgU3R1ZGVudDCB
+nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA4unrfZjhavfYMe+w2x0UhM7pSooahpM9ON8gPxoU
+f2KhwnffsaRhwQqjru9PyTtUOCR/SYW+331OCSe/OzemG2fscYTP+D1u3UhSniigj56pB9q1Zv3f
+BfR11LY1D1mlt5roRzCHjRXPtVd0cwdltW8/BlYyQvNuiA1Q9fWDZ4cCAwEAATANBgkqhkiG9w0B
+AQUFAAOBgQCxBBBhP6lpFuw26q3zqRSeB14/EZNkY8gQ70kGQ0iZEzBFy3GuseK5l8/Nt5vFcKVr
+4hYo8OAjZhpDoG4ft4GUs4yR4aqlaB4xc2liHlHtDtORTl6OqFkYia3sTZaDn9ebd9td/v0xrV8u
+lAXPKfKs/Rld0Rfx35ScwEo9GuNvEQ==</X509Certificate></X509Data></KeyInfo></Signature>
+  <saml:Subject xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
+    <saml:NameID>harold_dt</saml:NameID>
+  </saml:Subject>
+  <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="FullName"/>
+  <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="JobTitle"/>
+</samlp:AttributeQuery>

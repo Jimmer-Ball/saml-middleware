@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.timepoorprogrammer.saml</groupId>
+    <name>SAML middleware for hosting</name>
+    <artifactId>saml-middleware</artifactId>
+    <packaging>war</packaging>
+    <description>SAML middleware project that is used within our domain to process incoming SAML or other
+        single sign on assertions, talks to our stateful application/service Authoriser service implementations
+        at the right location within hosting given the customer code and service type, and then re-direct the
+        user's browser to the application/service backdoor. The target service then matches up the cookie details
+        it is sent with local state, and our user accesses the application without needing to login with
+        credentials. The project also contains commissioning parts that allow a new route from a customer
+        into hosting to be tested, and allows a new service to be tested without involving customers. It runs
+        on a custom Tomcat application server only becuase hosting won't move to Glassfish for this app as they
+        don't understand it yet.
+    </description>
+    <version>${versionNumber}</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <versionNumber>1.0-SNAPSHOT</versionNumber>
+        <releasesRepoUrl>http://localhost:8090/nexus/content/repositories/releases</releasesRepoUrl>
+        <snapshotsRepoUrl>http://localhost:8090/nexus/content/repositories/snapshots</snapshotsRepoUrl>
+        <sourceLocation>scm:svn:http://localhost/svn/saml/saml-middleware/trunk</sourceLocation>
+        <buildNumber/>
+    </properties>
+
+    <scm>
+        <connection>${sourceLocation}</connection>
+        <developerConnection>${sourceLocation}</developerConnection>
+    </scm>
+
+    <profiles>
+        <profile>
+            <id>snapshot</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <deployRepoId>internal</deployRepoId>
+                <deployRepoUrl>${snapshotsRepoUrl}</deployRepoUrl>
+                <isRelease>false</isRelease>
+            </properties>
+        </profile>
+        <profile>
+            <id>devRelease</id>
+            <activation>
+                <property>
+                    <name>build</name>
+                    <value>devRelease</value>
+                </property>
+            </activation>
+            <properties>
+                <versionNumber>1.0.${buildNumber}</versionNumber>
+                <deployRepoId>internal</deployRepoId>
+                <deployRepoUrl>${releasesRepoUrl}</deployRepoUrl>
+                <isRelease>true</isRelease>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <!-- Needed for the tomcat plugin to "know" the name of the unpacked WAR directory in the
+             target directory to deploy pre-integration testing -->
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <plugins>
+            <!-- Standard compiler and source and javadoc plugins -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Make sure we only run meaningful unit tests and make sure we only run integration tests when
+                 the co-located Tomcat has deployed the app, so after the pre-integration-test phase, and not
+                 during the normal test phase, as the app has yet to be built. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>it/**/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>it/**/*Test.java</include>
+                    </includes>
+                    <argLine>-Xms256m -Xmx1024m -XX:MaxPermSize=512m</argLine>
+                </configuration>
+            </plugin>
+            <!-- Get hold of the dummy application WAR dependency from the Nexus release repository and
+                 copy it locally to a known local name ready for deployment on co-located Tomcat. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>get-hold-of-dummy-app</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <!-- The middleware and the dummy application comes as a pairing, so keep an eye out
+                                 for newer known versions of the dummy application on Jenkins (srv-dv11) and update
+                                 the versions here if needed to ensure the right middleware uses the right dummy app -->
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.timepoorprogrammer.saml</groupId>
+                                    <artifactId>dummy-application</artifactId>
+                                    <version>1.0-SNAPSHOT</version>
+                                    <type>war</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                    <destFileName>dummy-application.war</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Tomcat 6 container plugin used to deploy the dir ${project.artifactId}-${project.version} found under
+                 the target directory. Note the configuration.  We have had to go through the setup of a special
+                 apache-tomcat-6.0.20 installation as outlined on the WIKI at http://confluence/display/SOAStrategy/
+                 SAMLAssertion+Processing#SAMLAssertionProcessing-Middlewareinstallationdetails. Note that this special 
+                 apache-tomcat-6.0.20 is co-located and running on port 8090, and whose manager username and password 
+                 required to do the deployment and un-deployment of a WAR is as provided. Also, the context.xml of the
+                 co-located Tomcat needs to be amended (if on a windows box) to prevent resource locking preventing
+                 the application from being un-deployable.  Add the attribute antiResourceLocking="true" to the Context 
+                 XML item.  If you aren't sure where to start with this go onto srv-dv11 Jenkins and copy the
+                 directory D:\TOOLS\apache-tomcat-6.0.20-for-SAML up and unpack it locally.  Then follow the setup
+                 notes.  I will get this Tomcat into a ZIP artifact of its own you can then get from Nexus when I have
+                 the time. -->
+            <!-- plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <url>http://localhost:8090/manager</url>
+                    <username>manager</username>
+                    <password>hello123</password>
+                </configuration-->
+                <!-- Deploy both the middleware and the dummy application we depend on to co-located Tomcat prior
+                     to integration tests, and undeploy both the middleware and the dummy application post
+                     integration tests. -->
+                <!--executions>
+                    <execution>
+                        <id>deploy-middleware-to-colocated-tomcat</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                        <configuration>
+                            <path>/SAMLWeb</path>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-dummy-app-to-colocated-tomcat</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals-->
+                        <!-- The version here needs to match up with the DummyApp version used by the
+                             maven-dependency-plugin -->
+                        <!--configuration>
+                            <warFile>${project.build.directory}/dummy-application.war</warFile>
+                            <path>/DummyApp</path>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>undeploy-middleware-from-colocated-tomcat</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>undeploy</goal>
+                        </goals>
+                        <configuration>
+                            <path>/SAMLWeb</path>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>undeploy-dummy-app-from-colocated-tomcat</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>undeploy</goal>
+                        </goals>
+                        <configuration>
+                            <path>/DummyApp</path>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin-->
+
+            <!-- Validate the project setting make sense at the validate phase, prepare any files that need extra
+                 processing at the prepare-package phase, do any extra installation actions at the install phase,
+                 do any extra deployment actions at the deploy phase, and finally allow this module to do the
+                 tagging bit.  To find out what all the settings mean, add <showSettings>true</showSettings> to
+                 the configuration list below, and maven run "validate" to get an explanation. -->
+            <plugin>
+                <groupId>com.timepoorprogrammer.maven.plugins</groupId>
+                <artifactId>development-plugin</artifactId>
+                <configuration>
+                    <isRelease>${isRelease}</isRelease>
+                    <version>${version}</version>
+                    <configControlSourceLocation>${sourceLocation}</configControlSourceLocation>
+                    <configControlTagRootLocation>http://localhost/svn/saml/saml-middleware/tags
+                    </configControlTagRootLocation>
+                    <remoteRepositoryId>${deployRepoId}</remoteRepositoryId>
+                    <remoteRepositoryURL>${deployRepoUrl}</remoteRepositoryURL>
+                    <remoteRepositoryServiceURL>http://localhost:8090/nexus</remoteRepositoryServiceURL>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>validate</goal>
+                            <goal>prepare-package</goal>
+                            <goal>install</goal>
+                            <goal>deploy</goal>
+                            <goal>tag</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Our simple WAR just uses the web.xml we've already made -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- =============================================== -->
+        <!-- Bundle up the following dependencies into a WAR -->
+        <!-- =============================================== -->
+        <dependency>
+            <groupId>com.timepoorprogrammer.saml</groupId>
+            <artifactId>saml-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <!-- We don't include the full wodge of the newer XML tooling library as for them to work with
+                     Tomcat they need to live in the endorsed directory of the custom Tomcat distribution to ensure
+                     the JVM under which Tomcat is running picks up the newer XML libraries than the ones it uses
+                     by default. -->
+                <exclusion>
+                    <groupId>xml-resolver</groupId>
+                    <artifactId>xml-resolver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.timepoorprogrammer.saml</groupId>
+            <artifactId>authorisation-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <!-- RestEasy client dependencies -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>2.1.0.GA</version>
+            <!-- Don't use RestEasys logging implementation, and don't include a version of Apache's HttpClient that is
+                 newer than 3.1 for compatibility reasons. -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpcore</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>2.1.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.timepoorprogrammer</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- ============================================================================= -->
+        <!-- These dependencies are either provided via transitive dependencies from other -->
+        <!-- dependencies or are bundled up within a Tomcat 6.x distribution already.      -->
+        <!-- ============================================================================= -->
+        <!-- Already provided in a vanilla Tomcat 6.x distribution, so servlet 2.5 and JSTL 1.2 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- TODO: We cannot yet depend on JEE6 which also covers JSTL and newer Cookies, until we are on a servlet 3 container.   -->
+        <!--dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency-->
+
+        <!-- ============================================= -->
+        <!-- Dependencies only needed for testing purposes -->
+        <!-- ============================================= -->
+        <dependency>
+            <groupId>com.timepoorprogrammer</groupId>
+            <artifactId>test-framework</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>tjws</artifactId>
+            <version>2.1.0.GA</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>internal</id>
+            <url>${releasesRepoUrl}</url>
+        </repository>
+        <snapshotRepository>
+            <id>internal</id>
+            <url>${snapshotsRepoUrl}</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

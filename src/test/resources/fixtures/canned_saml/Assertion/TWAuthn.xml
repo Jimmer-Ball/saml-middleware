@@ -1,0 +1,20 @@
+<saml:Assertion Version="2.0" ID="_9cda8497-74ef-4c3a-ab9f-7e1006cad77e" IssueInstant="2010-09-20T22:44:03Z" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
+    <saml:Issuer Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">https://twservices.dev.timewarner.com/TWSAMLService</saml:Issuer>
+    <saml:Subject>
+        <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">TIMEWARNERID|9/20/2010 10:43:03 PM</saml:NameID>
+        <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+            <saml:SubjectConfirmationData NotOnOrAfter="2010-09-20T18:49:03Z" Recipient="http://ac27010.uk.rebushr.com:8080/SAMLWeb/myview/SAML11AssertionConsumer" />
+        </saml:SubjectConfirmation>
+    </saml:Subject>
+    <saml:Conditions NotBefore="2010-09-20T22:42:03Z" NotOnOrAfter="2011-09-20T22:46:03Z">
+        <saml:AudienceRestriction>
+            <saml:Audience>Northgatearinso.com</saml:Audience>
+        </saml:AudienceRestriction>
+    </saml:Conditions>
+    <saml:AuthnStatement AuthnInstant="2010-09-20T18:44:03Z" SessionIndex="ca825094-ea7e-4489-a8ad-59282aef8c72" SessionNotOnOrAfter="2010-09-20T18:49:03Z">
+        <saml:AuthnContext>
+            <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</saml:AuthnContextClassRef>
+        </saml:AuthnContext>
+    </saml:AuthnStatement>
+</saml:Assertion>
+

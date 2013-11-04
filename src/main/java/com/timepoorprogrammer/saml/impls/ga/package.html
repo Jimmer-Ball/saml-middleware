@@ -1,0 +1,18 @@
+<html>
+<body>
+<p>This package holds bespoke code for Goldman Sachs, using the customer prefix code applied
+by the hosting team as a directory name under which we organise our code.  The Goldman Sachs solution doesn't
+make use of the SAML metadata, as it doesn't use SAML.  Their infrastructure sends us assertions but in a very
+simple form. It does make use of the routing configuration, as whether we recieve SAML or not, the middleware
+still needs to route to the appropriate MyView instances for the customer.  Note the customer code in hosting is
+<i>GA</i> and not GS as would be logical, but is already used.</p>
+
+<h2>Package Specification</h2>
+
+<p>The authorisation mechanism required by Goldman Sachs uses a shared key MAC architecture and is described on
+    the WIKI page
+    http://hrs-dev6.hrs.northgate-is.com/display/SOAStrategy/Goldman+Sachs+and+their+custom+authentication.</p>
+<p>In the commissioning stage, load the page at the context path/ga/getUserDetails.jsp page to submit an assertion
+    to the consumer.  It uses the saml.properties configuration and gives a good end to end test for the consumer.</p>
+</body>
+</html>

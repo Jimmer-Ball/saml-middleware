@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<saml:Assertion
+  xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  ID="Assertion12345789"
+  IssueInstant="2009-07-15T15:43:41.531Z"
+  Version="2.0"
+>
+  <saml:Issuer>http://mycom.com/MyJavaAttributeService</saml:Issuer>
+  <saml:Subject>
+    <saml:NameID
+      Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+    >ga489Slge8+0nio9=</saml:NameID>
+  </saml:Subject>
+  <saml:AttributeStatement>
+    <saml:Attribute
+      Name="FullName"
+    >
+      <saml:AttributeValue>William Whitford Provost</saml:AttributeValue>
+    </saml:Attribute>
+    <saml:Attribute
+      Name="JobTitle"
+    >
+      <saml:AttributeValue>Grand Poobah</saml:AttributeValue>
+    </saml:Attribute>
+  </saml:AttributeStatement>
+</saml:Assertion>
+

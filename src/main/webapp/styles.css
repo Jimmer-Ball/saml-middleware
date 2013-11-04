@@ -1,0 +1,394 @@
+/*
+ * Page body definition
+ */
+#body
+{
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+/*
+ * Page layout wrapper
+ */
+#wrapper 
+{
+    position: relative;
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}    
+/*
+ * Page Header
+ */
+#header
+{
+    height: 42px;
+    text-align: left;
+    position: relative;
+    padding: 1em 0 1em 0;
+}
+/*
+ * Page content
+ */
+#content
+{
+    position: relative;
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+/*
+ * Tabs listings
+ */
+.tabs 
+{
+    text-align: center;
+}
+.tabs ul 
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+/* 
+ * Put a 2 px pad to the right of each tab to 
+ * space the tabs out 
+ */
+.tabs li 
+{
+    display: inline;
+    margin: 0 3px 0 0;
+}
+/* 
+ * Create an unselected tab class style 
+ */
+.tabs .unselected {
+}
+/* 
+ * Note the style for an unselected tab is applied to 
+ * the anchor within 
+ */
+.tabs .unselected a 
+{
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    text-decoration: none;
+    font-family: Helvetica,serif;
+    font-size: 10pt;
+    color: #FFFFFF; 
+    background: #B51032;
+}
+/* 
+ * Create a selected tab class style for onclick 
+ */
+.tabs .selected {
+}
+/* 
+ * Note the style for a selected tab is applied to 
+ * the anchor within 
+ */
+.tabs .selected a
+{
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    background: #FFFFFF;
+    text-decoration: none;
+    color: #455372;
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Helvetica,serif;
+    border-top: 2px solid #B51032;
+    border-right: 2px solid #B51032;
+    border-left: 2px solid #B51032;    
+}
+/* 
+ * The dynamicPanel the tabs will sit on holds the same 
+ * border top colour as the tabs 
+ */
+#dynamicPanel
+{
+    border-top: 2px solid #B51032;
+    background: #FFFFFF;
+    padding: 1em;
+}
+/*
+ * Padding for spacing
+ */
+.padding
+{
+    clear: both;
+    height: 10px;
+}
+/*
+ * Definition for the initial text introduction
+ */
+.welcomeBlock
+{
+    text-align: justify;
+    padding-top: 3px;
+    font-family: Helvetica,serif;
+    color: #455372;
+    font-size: 11pt;
+}
+/*
+ * Simple list
+ */
+.simpleList
+{
+    font-family: Helvetica,serif;
+    color: #455372;
+    font-size: 11pt;
+}
+/*
+ * Page footer
+ */
+#footer 
+{
+    clear: both;
+    position: relative;
+    font-size: 80%;
+    margin-top: 2em;
+    text-align: right;
+    color: #999;
+    border-top: 1px solid #ececec;
+    background-color: transparent;
+}
+/*
+ * Custom text titles
+ */
+h1
+{
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    font-family: Helvetica,serif;
+    color: #455372;
+    font-size: 16pt;
+    margin-left:auto; 
+    margin-right:auto;
+}
+h2
+{
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    font-family: Helvetica,serif;
+    color: #455372;
+    font-size: 13pt;
+    margin-left:auto; 
+    margin-right:auto;
+}
+/*
+ * Data entry table
+ */
+.entrytable
+{
+    border: 1px solid #aaa;
+    margin-left:auto; 
+    margin-right:auto;
+}
+.entrytable th
+{
+    padding: 5px;
+    text-align: right;
+    font-family: Helvetica, serif;
+    font-weight: bold;
+    color: #455372;
+    font-size: 12pt;
+}
+.entrytable input
+{
+   padding: 5px;
+   text-align: center; 
+   font-family: Helvetica, serif;
+   font-size: 10pt;
+   color: #FB7820;
+   border: 1px solid #aaa;
+}
+/*
+ * Data listing table
+ */
+.datatable
+{
+    border: 1px solid #aaa;
+    border-collapse: collapse;
+    margin-right:auto; 
+    margin-left:auto;
+}
+.datatable th
+{
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Helvetica, serif;
+    color: #455372;
+    background-color: #E2E2E2;
+    font-size: 12pt;
+}
+.datatable td
+{
+   padding: 5px; 
+   text-align: center; 
+   font-family: Helvetica, serif;
+   font-size: 10pt;
+   color: #FB7820;
+}
+.datatable .selected
+{
+    background-color: #E2E2E2;
+}
+.datatable .unselected
+{
+    background-color: #FFFFFF;
+}
+
+/*
+ * Icon container
+ */
+.iconContainer
+{
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: Helvetica, serif;
+    color: #455372;
+    cursor: pointer; 
+    margin-right: 5px;
+}
+/*
+ * Icon 
+ */
+.icon
+{
+    vertical-align: middle;
+    margin-right: 5px;
+}
+/*
+ * Option (edit, delete, whatever) icon
+ */
+.optionIcon
+{
+    vertical-align: middle;
+    margin-right: 10px;
+}
+/*
+ * Save button
+ */
+.input-button-save
+{
+   padding: 5px; 
+   color: #455372;
+   background-color: #7B97E0;
+   border: 1px outset #aaa;
+   font-weight: bold;
+   font-size: 10pt;
+   font-family: Helvetica, serif;
+   float: left;
+   width: 5em;
+}
+/*
+ * Cancel button
+ */
+.input-button-cancel
+{
+   padding: 5px; 
+   color: #455372;
+   background-color: #7B97E0;
+   border: 1px outset #aaa;
+   font-weight: bold;
+   font-size: 10pt;
+   font-family: Helvetica, serif;
+   float: right;
+   width: 5em;
+}
+/*
+ * Drop down selection initial widget
+ */
+.myselection
+{
+    width: 130px;
+    text-align: center; 
+    font-family: Helvetica, serif;
+    font-size: 10pt; 
+    color: #FB7820;
+}
+/*
+ * Drop down selection list option
+ */
+.myoption
+{
+   text-align: center; 
+   font-family: Helvetica, serif;
+   font-size: 10pt;
+   color: #FB7820;
+}
+/*
+ * Default (hidden) on error
+ */
+.errorStatus
+{
+    text-align: center; 
+    margin:1%;
+    padding: 5px;
+    font-family: Helvetica, serif;
+    font-size: 10pt;
+    font-weight: bold;
+    background-color: #edcdcb;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9d3d35;
+    color: #9d3d35;
+    visibility: hidden;
+}
+/*
+ * Visible on error div
+ */
+.visibleErrorStatus
+{
+    text-align: center; 
+    margin:1%;
+    padding: 5px;
+    font-family: Helvetica, serif;
+    font-size: 10pt;
+    font-weight: bold;
+    background-color: #edcdcb;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9d3d35;
+    color: #9d3d35;
+}
+/*
+ * Data Entry hint
+ */
+.hint
+{
+    text-align: center; 
+    font-family: Helvetica, serif;
+    font-size: 7pt;
+    color: #9d3d35;
+}
+/*
+ * Helptip definition
+ */
+#helptip
+{
+    position: absolute;
+    width: 150px;
+    visibility: hidden;
+    text-align: center; 
+    margin:1%;
+    padding: 5px;
+    font-family: Helvetica, serif;
+    font-size: 10pt;
+    font-weight: bold;
+    background-color: lightyellow;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9d3d35;
+    color: #9d3d35;
+    z-index: 100;
+}
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<samlp:AuthzDecisionQuery
+  xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+  ID="AuthzQuery12345789"
+  IssueInstant="2009-07-15T15:49:12.890Z"
+  Resource="http://mycom.com/Repository/Private"
+  Version="2.0"
+>
+  <saml:Issuer
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  >http://somecom.com/SomeJavaRelyingParty</saml:Issuer>
+  <saml:Subject
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  >
+    <saml:NameID>harold_dt</saml:NameID>
+  </saml:Subject>
+  <saml:Action
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    Namespace="urn:oasis:names:tc:SAML:1.0:action:rwedc"
+  >read</saml:Action>
+</samlp:AuthzDecisionQuery>
+

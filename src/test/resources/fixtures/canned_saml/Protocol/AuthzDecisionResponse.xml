@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<samlp:Response
+  xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+  ID="_fcc1b0f15dbbad9c94c226a8c2726ef1"
+  InResponseTo="AuthzQuery12345789"
+  IssueInstant="2009-07-15T15:49:29.000Z"
+  Version="2.0"
+>
+  <saml:Issuer
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+  >http://somecom.com/SomeJavaAssertingParty</saml:Issuer>
+  <samlp:Status>
+    <samlp:StatusCode
+      Value="urn:oasis:names:tc:SAML:2.0:status:Success"
+    />
+  </samlp:Status>
+  <saml:Assertion
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    ID="Assertion12345789"
+    IssueInstant="2009-07-15T15:49:28.781Z"
+    Version="2.0"
+  >
+    <saml:Issuer>http://mycom.com/MyJavaAuthorizationService</saml:Issuer>
+    <saml:Subject>
+      <saml:NameID
+        Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+      >ga489Slge8+0nio9=</saml:NameID>
+    </saml:Subject>
+    <saml:AuthzDecisionStatement
+      Decision="Permit"
+      Resource="http://mycom.com/Repository/Private"
+    >
+      <saml:Action
+        Namespace="urn:oasis:names:tc:SAML:1.0:action:rwedc"
+      >read</saml:Action>
+    </saml:AuthzDecisionStatement>
+  </saml:Assertion>
+</samlp:Response>
+

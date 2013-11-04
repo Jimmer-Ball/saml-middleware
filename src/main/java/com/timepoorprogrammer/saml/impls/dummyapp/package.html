@@ -1,0 +1,15 @@
+<html>
+<body>
+<p>This package holds code for the dummy application service that comes bundles with the middleware and is used to help
+commission the middleware software in hosting.</p>
+
+<h2>Package Specification</h2>
+
+<p>The code in here corresponds to the DummyApp entity definition found in the idp_and_sp_metadata.xml that comes
+with the project, and maps to the routing details held in any property starting with saml.dummyapp in saml.properties.
+Only if you are commissioning a completely new service provided by NorthgateArinso will you <b>ever</b> need to
+write your own consumer at the SAML middleware.  Its a big job, done when a new service of ours needs to be
+made available by the SAML route.  Normally, if you are a bespoke team member you'll be bespoking
+assertion consumer processors, and not providing completely new entry points for assertion consumption.</p>
+</body>
+</html>

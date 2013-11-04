@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <!-- ========================================== -->
+    <!-- Just navigate to the index page by default -->
+    <!-- ========================================== -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- =========================================================================== -->
+    <!-- Assertion producers and consumers for the management UI (for commissioning) -->
+    <!-- =========================================================================== -->
+    <!-- Embedded producers -->
+    <servlet>
+        <servlet-name>SAML2 Assertion Producer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.standard.producer.servlet.SAML2AssertionProducerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SAML1.1 Assertion Producer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.standard.producer.servlet.SAML11AssertionProducerServlet</servlet-class>
+    </servlet>
+    <!-- Embedded consumers -->
+    <servlet>
+        <servlet-name>DummyApp SAML2 Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.dummyapp.consumer.servlet.SAML2AssertionConsumerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DummyApp SAML1.1 Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.dummyapp.consumer.servlet.SAML11AssertionConsumerServlet</servlet-class>
+    </servlet>
+    <!-- SAML2 IDP-initiated POST binding JSP test scenario -->
+    <servlet>
+        <servlet-name>SAML2 IdP Initiated Post Binding details</servlet-name>
+        <jsp-file>/saml2/getIdPInitiatedPostBindingDetailsFromUser.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>SAML2 IdP Initiated Post Binding send</servlet-name>
+        <jsp-file>/saml2/sendIdPInitiatedPostBinding.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>SAML2 Assertion Contents</servlet-name>
+        <jsp-file>/saml2/showAssertionContents.jsp</jsp-file>
+    </servlet>
+    <!-- SAML1.1 IDP-initiated POST binding JSP test scenario -->
+    <servlet>
+        <servlet-name>SAML1.1 IdP Initiated Post Binding details</servlet-name>
+        <jsp-file>/saml11/getIdPInitiatedPostBindingDetailsFromUser.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>SAML1.1 IdP Initiated Post Binding send</servlet-name>
+        <jsp-file>/saml11/sendIdPInitiatedPostBinding.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>SAML1.1 Assertion Contents</servlet-name>
+        <jsp-file>/saml11/showAssertionContents.jsp</jsp-file>
+    </servlet>
+    <!-- The client page from which a soak test can be controlled  -->
+    <servlet>
+        <servlet-name>Soak Client</servlet-name>
+        <jsp-file>/soakClient.jsp</jsp-file>
+    </servlet>
+    <!-- The soak source servlet that sends assertions -->
+    <servlet>
+        <servlet-name>Soak Source Servlet</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.soak.SourceServlet</servlet-class>
+    </servlet>
+    <!-- The sink consumers that process assertions sent from the source servlet -->
+    <servlet>
+        <servlet-name>SAML1.1 Soak Sink Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.soak.SAML11AssertionSinkConsumer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SAML2 Soak Sink Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.soak.SAML2AssertionSinkConsumer</servlet-class>
+    </servlet>
+
+    <!-- ================================================================= -->
+    <!--                         SERVICE CONSUMERS                         -->
+    <!-- ================================================================= -->
+    <!-- MyView assertion consumers -->
+    <servlet>
+        <servlet-name>MyView SAML2 Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.myview.consumer.servlet.SAML2AssertionConsumerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyView SAML1.1 Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.myview.consumer.servlet.SAML11AssertionConsumerServlet</servlet-class>
+    </servlet>
+    <!-- WebView (Aurora) assertion consumers -->
+    <servlet>
+        <servlet-name>WebView SAML2 Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.webview.consumer.servlet.SAML2AssertionConsumerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WebView SAML1.1 Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.webview.consumer.servlet.SAML11AssertionConsumerServlet</servlet-class>
+    </servlet>
+
+    <!-- ============================================================================== -->
+    <!-- Goldman Sachs bespoke assertion producers and consumers.  Note the only reason -->
+    <!-- we have a bespoke consumer is because Goldman Sachs don't send us SAML. The    -->
+    <!-- reason we have a bespoke producer is otherwise we've no way of testing what we -->
+    <!-- have done without involving the customer.                                      -->
+    <!-- ============================================================================== -->
+    <!-- Custom (bespoke) Goldman Sachs assertion producer for MyView service -->
+    <servlet>
+        <servlet-name>Goldman Sachs Assertion Producer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.ga.producer.servlet.AssertionProducerServlet</servlet-class>
+    </servlet>
+    <!-- Custom (bespoke) Goldman Sachs assertion consumer for MyView service -->
+    <servlet>
+        <servlet-name>Goldman Sachs Assertion Consumer</servlet-name>
+        <servlet-class>com.timepoorprogrammer.saml.impls.ga.consumer.servlet.AssertionConsumerServlet</servlet-class>
+    </servlet>
+
+    <!-- =============================================================== -->
+    <!-- URL mappings for SAML2 IdP-initiated POST binding test use case -->
+    <!-- =============================================================== -->
+    <servlet-mapping>
+        <servlet-name>SAML2 Assertion Producer</servlet-name>
+        <url-pattern>/SAML2AssertionProducer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DummyApp SAML2 Assertion Consumer</servlet-name>
+        <url-pattern>/dummyapp/SAML2AssertionConsumer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML2 IdP Initiated Post Binding details</servlet-name>
+        <url-pattern>/saml2/idpDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML2 IdP Initiated Post Binding send</servlet-name>
+        <url-pattern>/saml2/idpSender</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML2 Assertion Contents</servlet-name>
+        <url-pattern>/saml2/SAMLContents</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============================================================ -->
+    <!-- URL mappings for SAML1.1 IdP-initiated POST binding use case -->
+    <!-- ============================================================ -->
+    <servlet-mapping>
+        <servlet-name>SAML1.1 Assertion Producer</servlet-name>
+        <url-pattern>/SAML11AssertionProducer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DummyApp SAML1.1 Assertion Consumer</servlet-name>
+        <url-pattern>/dummyapp/SAML11AssertionConsumer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML1.1 IdP Initiated Post Binding details</servlet-name>
+        <url-pattern>/saml11/idpDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML1.1 IdP Initiated Post Binding send</servlet-name>
+        <url-pattern>/saml11/idpSender</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML1.1 Assertion Contents</servlet-name>
+        <url-pattern>/saml11/SAMLContents</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============================================ -->
+    <!-- URL mappings for the SOAK testing framework. -->
+    <!-- ============================================ -->
+    <servlet-mapping>
+        <servlet-name>Soak Client</servlet-name>
+        <url-pattern>/soakClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Soak Source Servlet</servlet-name>
+        <url-pattern>/sourceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML1.1 Soak Sink Consumer</servlet-name>
+        <url-pattern>/SAML11SinkConsumer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAML2 Soak Sink Consumer</servlet-name>
+        <url-pattern>/SAML2SinkConsumer</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============================================= -->
+    <!--            MYVIEW SERVICE MAPPINGS            -->
+    <!-- ============================================= -->
+    <servlet-mapping>
+        <servlet-name>MyView SAML2 Assertion Consumer</servlet-name>
+        <url-pattern>/myview/SAML2AssertionConsumer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyView SAML1.1 Assertion Consumer</servlet-name>
+        <url-pattern>/myview/SAML11AssertionConsumer</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============================================= -->
+    <!--            AURORA SERVICE MAPPINGS            -->
+    <!-- ============================================= -->
+    <servlet-mapping>
+        <servlet-name>WebView SAML2 Assertion Consumer</servlet-name>
+        <url-pattern>/webview/SAML2AssertionConsumer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WebView SAML1.1 Assertion Consumer</servlet-name>
+        <url-pattern>/webview/SAML11AssertionConsumer</url-pattern>
+    </servlet-mapping>
+
+    <!-- =============================================================================== -->
+    <!-- URL mappings for Goldman Sachs custom (bespoke) assertion consumer and producer -->
+    <!-- =============================================================================== -->
+    <servlet-mapping>
+        <servlet-name>Goldman Sachs Assertion Producer</servlet-name>
+        <url-pattern>/ga/AssertionProducer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Goldman Sachs Assertion Consumer</servlet-name>
+        <url-pattern>/ga/AssertionConsumer</url-pattern>
+    </servlet-mapping>
+</web-app>

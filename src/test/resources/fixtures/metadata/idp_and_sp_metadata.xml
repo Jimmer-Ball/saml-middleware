@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SAML metadata file holding customer entity details (identity providers or IDPs) and
+     Northgate service entity details (service providers or SPs) --> 
+<EntitiesDescriptor Name="northgate_trust_relationships"
+                    xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                    xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+
+    <!-- Identity Provider metadata descriptor for a generic SAML2 idp used in commissioning -->
+    <EntityDescriptor entityID="idp_saml2">
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <!-- In production this location URL needs to be a publically visible address -->
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                 Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/SAML2AssertionProducer"/>
+            <!-- This is used for signature verification purposes of a signed response at a service provider. So
+                 it is an Identity Provider's way of saying to a Service Provider, please validate the signature
+                 of a response we send you using the public key information you can extract from this certificate. -->
+            <KeyDescriptor use="signing">
+                <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+                            MIICqDCCAZCgAwIBAgIETJNDTTANBgkqhkiG9w0BAQUFADAWMRQwEgYDVQQDEwtsb2NhbGNsaWVu
+                            dDAeFw0xMDA5MTcxMDMwMzdaFw0yMDA5MTQxMDMwMzdaMBYxFDASBgNVBAMTC2xvY2FsY2xpZW50
+                            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy17Xarsd9XecLbRF26H/TIanY07OhZlk
+                            OkB9hjxvmkcJk9gb4LGenXzOG3v7Ogy8RMperah+tML7dOb9kh8bM5nmAvR7TUKp0s0EITpW3gGG
+                            0bQkutUVWXDibHHhhsFd0qzeI/N4wayHjwRwUswyOj5uGgQR7XU+XItx6AVYpSP1Qqu7FZHopT0C
+                            Sl/2DfAqP22mmptDtwL0qOK+qQECoqUiZP0x0FLbjMZCeHqZEvYe/Ah3OxBZwVmRdhTqEd+3XMh9
+                            j08HJ6It7C05M1QhAoik+bENy61XcEaqmCKu3NCB17UQEoayBHh/clf0Qj1bbX1oSR8qnmBOF8XN
+                            jzTd5wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQB+LV0V6f/k5n0dwXU32zRvimo0FCqdKV8V8uq1
+                            eNIuT2twNXhOsuiU6636rDwHNSXoFbrw8EIh/Rcnmt8ybfXRd0QjO55oVFWXGjs9hS5ygHYrOf12
+                            1nQrQEfnvFiqrrOq60kirdarhGguhKIMsNJ7LfTop7LGsXyD4bNMbF9KCyAhym5mUPzFN9LYIiii
+                            GVxQxvaLjv7007GyVrhlAUs+Bu92X+bSsbO6Z2EvQVsIwO4s6YLPTuDFLeru7/fy87h4qzGcnavJ
+                            eWydemG/atil69n5u1Zv6HuongyYMA0P9uwDe8b5TE+E6ip/nVGzYNvTjSWoBWmcMctkYP5aClTx
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </KeyDescriptor>
+        </IDPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">IdentityProviderSAML2</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">IdentityProvider for SAML2</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://idp.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>John</GivenName>
+            <SurName>Smith</SurName>
+            <EmailAddress>john.smith@idp.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+
+    <!-- Identity Provider metadata descriptor for a generic SAML1.1 idp used in commissioning -->
+    <EntityDescriptor entityID="idp_saml11">
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+            <!-- This is used for signature verification purposes of a signed response at a service provider. So
+                 it is an Identity Provider's way of saying to a Service Provider, please validate the signature
+                 of a response we send you using the public key information you can extract from this certificate. -->
+            <KeyDescriptor use="signing">
+                <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+                            MIICqDCCAZCgAwIBAgIETJNDTTANBgkqhkiG9w0BAQUFADAWMRQwEgYDVQQDEwtsb2NhbGNsaWVu
+                            dDAeFw0xMDA5MTcxMDMwMzdaFw0yMDA5MTQxMDMwMzdaMBYxFDASBgNVBAMTC2xvY2FsY2xpZW50
+                            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy17Xarsd9XecLbRF26H/TIanY07OhZlk
+                            OkB9hjxvmkcJk9gb4LGenXzOG3v7Ogy8RMperah+tML7dOb9kh8bM5nmAvR7TUKp0s0EITpW3gGG
+                            0bQkutUVWXDibHHhhsFd0qzeI/N4wayHjwRwUswyOj5uGgQR7XU+XItx6AVYpSP1Qqu7FZHopT0C
+                            Sl/2DfAqP22mmptDtwL0qOK+qQECoqUiZP0x0FLbjMZCeHqZEvYe/Ah3OxBZwVmRdhTqEd+3XMh9
+                            j08HJ6It7C05M1QhAoik+bENy61XcEaqmCKu3NCB17UQEoayBHh/clf0Qj1bbX1oSR8qnmBOF8XN
+                            jzTd5wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQB+LV0V6f/k5n0dwXU32zRvimo0FCqdKV8V8uq1
+                            eNIuT2twNXhOsuiU6636rDwHNSXoFbrw8EIh/Rcnmt8ybfXRd0QjO55oVFWXGjs9hS5ygHYrOf12
+                            1nQrQEfnvFiqrrOq60kirdarhGguhKIMsNJ7LfTop7LGsXyD4bNMbF9KCyAhym5mUPzFN9LYIiii
+                            GVxQxvaLjv7007GyVrhlAUs+Bu92X+bSsbO6Z2EvQVsIwO4s6YLPTuDFLeru7/fy87h4qzGcnavJ
+                            eWydemG/atil69n5u1Zv6HuongyYMA0P9uwDe8b5TE+E6ip/nVGzYNvTjSWoBWmcMctkYP5aClTx
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </KeyDescriptor>
+        </IDPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">IdentityProviderSAML11</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">IdentityProvider for SAML1.1</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://idp.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>John</GivenName>
+            <SurName>Smith</SurName>
+            <EmailAddress>john.smith@idp.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+
+    <!-- Example TimeWarner entity descriptor -->
+    <EntityDescriptor entityID="NZ">
+        <!-- TimeWarner actually only send us SAML2 -->
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"
+                          WantAuthnRequestsSigned="true">
+            <KeyDescriptor use="signing">
+                <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+                    <X509Data>
+                        <X509Certificate>
+                            MIIE0zCCA7ugAwIBAgIKFSVGRwAAAAAAFjANBgkqhkiG9w0BAQUFADBvMQswCQYDVQQGEwJVUzERMA8GA1UECBMITmV3IFlvcmsxETAPBgNVBAcTCE5ldyBZb3JrMRQwEgYDVQQKEwtUaW1lIFdhcm5lcjELMAkGA1UECxMCSVQxFzAVBgNVBAMTDlRpbWUgV2FybmVyIENBMB4XDTA3MDcyNTE3MzYxOFoXDTExMDMxNjIxMTUzMlowgZYxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJOWTERMA8GA1UEBxMITmV3IFlvcmsxFDASBgNVBAoTC1RpbWUgV2FybmVyMRAwDgYDVQQLEwdTeXMgRGV2MRMwEQYDVQQDEwpUV1Rlc3RDZXJ0MSowKAYJKoZIhvcNAQkBFhttYW5ueS5tb3Jlbm9AdGltZXdhcm5lci5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALwXR9VYBfq0R+05n/3f3c4O0yussBuykiQwEixyk3D1aJVma35CZbJUULu93J3A/c7e1yfhcADSk4Qdh0cBazkXs2j+7lqH4DTZruziZ2b4qf1wehSnIosIy/jnkOoiauqetBpE1kGEZBUmzS7tRNYSPs+7zWtpBbpfpk/LBDzzAgMBAAGjggHLMIIBxzAOBgNVHQ8BAf8EBAMCBPAwRAYJKoZIhvcNAQkPBDcwNTAOBggqhkiG9w0DAgICAIAwDgYIKoZIhvcNAwQCAgCAMAcGBSsOAwIHMAoGCCqGSIb3DQMHMB0GA1UdDgQWBBTwj3cG0ITgT//J/PxrukQjmamZtzATBgNVHSUEDDAKBggrBgEFBQcDAjAfBgNVHSMEGDAWgBRoVvxka71tzb+kDQ+Y75L8NvtsJzB1BgNVHR8EbjBsMGqgaKBmhjJodHRwOi8vdHdueWNtYTU4L0NlcnRFbnJvbGwvVGltZSUyMFdhcm5lciUyMENBLmNybIYwZmlsZTovL1xcdHdueWNtYTU4XENlcnRFbnJvbGxcVGltZSBXYXJuZXIgQ0EuY3JsMIGiBggrBgEFBQcBAQSBlTCBkjBIBggrBgEFBQcwAoY8aHR0cDovL3R3bnljbWE1OC9DZXJ0RW5yb2xsL3R3bnljbWE1OF9UaW1lJTIwV2FybmVyJTIwQ0EuY3J0MEYGCCsGAQUFBzAChjpmaWxlOi8vXFx0d255Y21hNThcQ2VydEVucm9sbFx0d255Y21hNThfVGltZSBXYXJuZXIgQ0EuY3J0MA0GCSqGSIb3DQEBBQUAA4IBAQBqJa3KesjGzb+IolML1JfUSMIBKVRDyshuu2oJqyUztz4wENUd/ECYhHgXsVDg1lCADGmujFqCjIjA2oB7zCgW/va4Gwn8X03h2hU/ooUV8cYgfR9UaDLrmdYjLWASPB7C1pC8dTATfRiyi2Y1GjLzKxXHhCGxhabfduUdPFXtwo2n3f+3vTeH8/Q8gyB05J08excGA8uoE9ny+EsEP1u0KlFwKySPYgM5dc/l4OqtrmsvpgT+weYrOcninhkQGBOZPghgmnRGTJedzAf0dF6Z+PAYK3sGBiTVyLK+MqgrPME80ya3i21RaC6z9NHCY/MvJkCAdpC4qqoVWoR+tOwc
+                        </X509Certificate>
+                    </X509Data>
+                </KeyInfo>
+            </KeyDescriptor>
+            <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                                       Location="https://twservices.dev.timewarner.com/TWSAMLService" index="1"
+                                       isDefault="true"/>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                 Location="https://twservices.dev.timewarner.com/TWSAMLService"/>
+        </IDPSSODescriptor>
+        <!-- TimeWarner don't send us SAML1.1 but this is here for unit/integration test completeness and can be removed
+             from the actual metadata -->
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol"
+                          WantAuthnRequestsSigned="true">
+            <KeyDescriptor use="signing">
+                <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+                    <X509Data>
+                        <X509Certificate>
+                            MIIE0zCCA7ugAwIBAgIKFSVGRwAAAAAAFjANBgkqhkiG9w0BAQUFADBvMQswCQYDVQQGEwJVUzERMA8GA1UECBMITmV3IFlvcmsxETAPBgNVBAcTCE5ldyBZb3JrMRQwEgYDVQQKEwtUaW1lIFdhcm5lcjELMAkGA1UECxMCSVQxFzAVBgNVBAMTDlRpbWUgV2FybmVyIENBMB4XDTA3MDcyNTE3MzYxOFoXDTExMDMxNjIxMTUzMlowgZYxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJOWTERMA8GA1UEBxMITmV3IFlvcmsxFDASBgNVBAoTC1RpbWUgV2FybmVyMRAwDgYDVQQLEwdTeXMgRGV2MRMwEQYDVQQDEwpUV1Rlc3RDZXJ0MSowKAYJKoZIhvcNAQkBFhttYW5ueS5tb3Jlbm9AdGltZXdhcm5lci5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALwXR9VYBfq0R+05n/3f3c4O0yussBuykiQwEixyk3D1aJVma35CZbJUULu93J3A/c7e1yfhcADSk4Qdh0cBazkXs2j+7lqH4DTZruziZ2b4qf1wehSnIosIy/jnkOoiauqetBpE1kGEZBUmzS7tRNYSPs+7zWtpBbpfpk/LBDzzAgMBAAGjggHLMIIBxzAOBgNVHQ8BAf8EBAMCBPAwRAYJKoZIhvcNAQkPBDcwNTAOBggqhkiG9w0DAgICAIAwDgYIKoZIhvcNAwQCAgCAMAcGBSsOAwIHMAoGCCqGSIb3DQMHMB0GA1UdDgQWBBTwj3cG0ITgT//J/PxrukQjmamZtzATBgNVHSUEDDAKBggrBgEFBQcDAjAfBgNVHSMEGDAWgBRoVvxka71tzb+kDQ+Y75L8NvtsJzB1BgNVHR8EbjBsMGqgaKBmhjJodHRwOi8vdHdueWNtYTU4L0NlcnRFbnJvbGwvVGltZSUyMFdhcm5lciUyMENBLmNybIYwZmlsZTovL1xcdHdueWNtYTU4XENlcnRFbnJvbGxcVGltZSBXYXJuZXIgQ0EuY3JsMIGiBggrBgEFBQcBAQSBlTCBkjBIBggrBgEFBQcwAoY8aHR0cDovL3R3bnljbWE1OC9DZXJ0RW5yb2xsL3R3bnljbWE1OF9UaW1lJTIwV2FybmVyJTIwQ0EuY3J0MEYGCCsGAQUFBzAChjpmaWxlOi8vXFx0d255Y21hNThcQ2VydEVucm9sbFx0d255Y21hNThfVGltZSBXYXJuZXIgQ0EuY3J0MA0GCSqGSIb3DQEBBQUAA4IBAQBqJa3KesjGzb+IolML1JfUSMIBKVRDyshuu2oJqyUztz4wENUd/ECYhHgXsVDg1lCADGmujFqCjIjA2oB7zCgW/va4Gwn8X03h2hU/ooUV8cYgfR9UaDLrmdYjLWASPB7C1pC8dTATfRiyi2Y1GjLzKxXHhCGxhabfduUdPFXtwo2n3f+3vTeH8/Q8gyB05J08excGA8uoE9ny+EsEP1u0KlFwKySPYgM5dc/l4OqtrmsvpgT+weYrOcninhkQGBOZPghgmnRGTJedzAf0dF6Z+PAYK3sGBiTVyLK+MqgrPME80ya3i21RaC6z9NHCY/MvJkCAdpC4qqoVWoR+tOwc
+                        </X509Certificate>
+                    </X509Data>
+                </KeyInfo>
+            </KeyDescriptor>
+            <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                                       Location="https://twservices.dev.timewarner.com/TWSAMLService" index="1"
+                                       isDefault="true"/>
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                 Location="https://twservices.dev.timewarner.com/TWSAMLService"/>
+        </IDPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">TimeWarner</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">TimeWarner portal SAML2 producer</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">www.timewarner.com</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>subhrendu</GivenName>
+            <SurName>datta</SurName>
+            <EmailAddress>subhrendu.datta@timewarner.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+
+    <!-- Identity Provider metadata descriptor for British Airways -->
+    <EntityDescriptor entityID="https://fed-uat.baplc.com/fed/idp">
+        <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                 Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/SAML2AssertionProducer"/>
+            <KeyDescriptor use="signing">
+                <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+                            MIICqDCCAZCgAwIBAgIETJNDTTANBgkqhkiG9w0BAQUFADAWMRQwEgYDVQQDEwtsb2NhbGNsaWVu
+                            dDAeFw0xMDA5MTcxMDMwMzdaFw0yMDA5MTQxMDMwMzdaMBYxFDASBgNVBAMTC2xvY2FsY2xpZW50
+                            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy17Xarsd9XecLbRF26H/TIanY07OhZlk
+                            OkB9hjxvmkcJk9gb4LGenXzOG3v7Ogy8RMperah+tML7dOb9kh8bM5nmAvR7TUKp0s0EITpW3gGG
+                            0bQkutUVWXDibHHhhsFd0qzeI/N4wayHjwRwUswyOj5uGgQR7XU+XItx6AVYpSP1Qqu7FZHopT0C
+                            Sl/2DfAqP22mmptDtwL0qOK+qQECoqUiZP0x0FLbjMZCeHqZEvYe/Ah3OxBZwVmRdhTqEd+3XMh9
+                            j08HJ6It7C05M1QhAoik+bENy61XcEaqmCKu3NCB17UQEoayBHh/clf0Qj1bbX1oSR8qnmBOF8XN
+                            jzTd5wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQB+LV0V6f/k5n0dwXU32zRvimo0FCqdKV8V8uq1
+                            eNIuT2twNXhOsuiU6636rDwHNSXoFbrw8EIh/Rcnmt8ybfXRd0QjO55oVFWXGjs9hS5ygHYrOf12
+                            1nQrQEfnvFiqrrOq60kirdarhGguhKIMsNJ7LfTop7LGsXyD4bNMbF9KCyAhym5mUPzFN9LYIiii
+                            GVxQxvaLjv7007GyVrhlAUs+Bu92X+bSsbO6Z2EvQVsIwO4s6YLPTuDFLeru7/fy87h4qzGcnavJ
+                            eWydemG/atil69n5u1Zv6HuongyYMA0P9uwDe8b5TE+E6ip/nVGzYNvTjSWoBWmcMctkYP5aClTx
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </KeyDescriptor>
+        </IDPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">BritishAirways</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">IdentityProvider for British Airways</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://ba.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>John</GivenName>
+            <SurName>Smith</SurName>
+            <EmailAddress>john.smith@ba.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+
+    <!-- Service Provider metadata descriptor for Northgate myview  -->
+    <EntityDescriptor entityID="MyView">
+        <SPSSODescriptor
+                protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <!-- Assertion Consumer Service for SAML2 is the default.  In production the value of Location given in a customer's
+                 copy of this file needs to be the public facing URL our hosting infrastructure exposes to the outside world, so
+                 the outside world can send us SAML to a known end-point where we will consume it.  In production we would
+                 maintain our own copy of this file where the URL would be the local URL resolved at an assertion consumer
+                 service. -->
+            <AssertionConsumerService isDefault="true" index="0"
+                                      Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/myview/SAML2AssertionConsumer"/>
+            <!-- Assertion Consumer Service for SAML 1.1 is a different binding type and a different URL. Again this
+                 Location is different depending on whether the file is the copy we are giving to the customer (MUST be
+                 HTTPS to a publically visible URL provided by hosting) or is the copy we are keeping for ourselves, where
+                 the URL would be the locally resolved address of the assertion consumer within hosting on the middleware. -->
+            <AssertionConsumerService index="1" Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/myview/SAML11AssertionConsumer"/>
+            <!-- This certificate is used for assertion encryption purposes at an identity provider for all
+                 assertions that go to this specific service provider, so it is a Service Provider's way of
+                 saying to an Identity Provider, please encrypt any assertions you send us using the public
+                 key information you can extract from this certificate.  Note only SAML2 assertions can be
+                 encrypted. In SAML1.1 responses can be signed, but their content cannot be encrypted. -->
+            <KeyDescriptor use="encryption" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+                <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                    <ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                        <ds:X509Certificate xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                            MIICrDCCAZSgAwIBAgIETJNCVTANBgkqhkiG9w0BAQUFADAYMRYwFAYDVQQDEw1yZW1vdGVzZXJ2
+                            aWNlMB4XDTEwMDkxNzEwMjYyOVoXDTIwMDkxNDEwMjYyOVowGDEWMBQGA1UEAxMNcmVtb3Rlc2Vy
+                            dmljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJkPVM8zCHGzUF0owYR78QpiHfQz
+                            B53Hf9cX1mHfd8FFY23IztEhdDbVf9TV9A/8y7A4l5Md0M0LjSom+iU4fqCRRgq/j6yRHgZ2FjN7
+                            CM0+q4pRFd3tBjXnq4HJ04MWnQRrIQ3RGDQVt5uPzb9fKxeG7lHV4fZ9OiZdFqGr8+xk5+eGvDvN
+                            nu80N9I09BBZUOfxZLI4I8q9ZHzbOXq0SLTEUXsd62Uk2DnGVtfCQzfoLs9j6ypbOeYD5Ff0nebx
+                            Tpe2smcXYrb8Rj1qR/SGMk4PlCD6Islrb5SOYgjsNL1l9d73EF3/iXE7rugODRByw8MjL8ElEAW3
+                            8yuXu4ez5w8CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAIl2A1S32VgMY8yDrc3fU1RLZDhyShKCK
+                            9/KVm66CTaDvNMIsZEoVJPmck43G9TTx/ToVBuXHwyG3BUaADqi6f43TptNckTzgd1rYht/MRq3G
+                            zKoa/byfgEEeVncmnkTirZWOa6D5um5s6rq3S6dsoibsROw0PXvCajjhuDg3ckyz6JzQHirmiBYs
+                            +iFWXwcDZi/rxQovJMaLX+W7rUFOagRFpbnoeivaXmd9KH/km+jzZnSyDDDYtPuEbfCa3AAQCs8W
+                            Q+j7JpYQXvXJotwAqhUlMfHgQ3wUxoH9oo6G/h+XcyYCGX/DpgK29TZBLup3RWe7f5+5VJQHpeDs
+                            VaPe/A==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+                <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+            </KeyDescriptor>
+        </SPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">Northgate</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">Northgate</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://northgatearinso.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>Jim</GivenName>
+            <SurName>Ball</SurName>
+            <EmailAddress>james.ball@northgatearinso.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+
+    <!-- Service Provider metadata descriptor for Northgate WebView (Aurora)  -->
+    <EntityDescriptor entityID="WebView">
+        <SPSSODescriptor
+                protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <AssertionConsumerService isDefault="true" index="0"
+                                      Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/webview/SAML2AssertionConsumer"/>
+            <AssertionConsumerService index="1" Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/webview/SAML11AssertionConsumer"/>
+            <KeyDescriptor use="encryption" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+                <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                    <ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                        <ds:X509Certificate xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                            MIICrDCCAZSgAwIBAgIETJNCVTANBgkqhkiG9w0BAQUFADAYMRYwFAYDVQQDEw1yZW1vdGVzZXJ2
+                            aWNlMB4XDTEwMDkxNzEwMjYyOVoXDTIwMDkxNDEwMjYyOVowGDEWMBQGA1UEAxMNcmVtb3Rlc2Vy
+                            dmljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJkPVM8zCHGzUF0owYR78QpiHfQz
+                            B53Hf9cX1mHfd8FFY23IztEhdDbVf9TV9A/8y7A4l5Md0M0LjSom+iU4fqCRRgq/j6yRHgZ2FjN7
+                            CM0+q4pRFd3tBjXnq4HJ04MWnQRrIQ3RGDQVt5uPzb9fKxeG7lHV4fZ9OiZdFqGr8+xk5+eGvDvN
+                            nu80N9I09BBZUOfxZLI4I8q9ZHzbOXq0SLTEUXsd62Uk2DnGVtfCQzfoLs9j6ypbOeYD5Ff0nebx
+                            Tpe2smcXYrb8Rj1qR/SGMk4PlCD6Islrb5SOYgjsNL1l9d73EF3/iXE7rugODRByw8MjL8ElEAW3
+                            8yuXu4ez5w8CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAIl2A1S32VgMY8yDrc3fU1RLZDhyShKCK
+                            9/KVm66CTaDvNMIsZEoVJPmck43G9TTx/ToVBuXHwyG3BUaADqi6f43TptNckTzgd1rYht/MRq3G
+                            zKoa/byfgEEeVncmnkTirZWOa6D5um5s6rq3S6dsoibsROw0PXvCajjhuDg3ckyz6JzQHirmiBYs
+                            +iFWXwcDZi/rxQovJMaLX+W7rUFOagRFpbnoeivaXmd9KH/km+jzZnSyDDDYtPuEbfCa3AAQCs8W
+                            Q+j7JpYQXvXJotwAqhUlMfHgQ3wUxoH9oo6G/h+XcyYCGX/DpgK29TZBLup3RWe7f5+5VJQHpeDs
+                            VaPe/A==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+                <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+            </KeyDescriptor>
+        </SPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">Northgate</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">Northgate</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://northgatearinso.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>Jim</GivenName>
+            <SurName>Ball</SurName>
+            <EmailAddress>james.ball@northgatearinso.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+
+    <!-- Dummy Application consumer that copes with both SAML1.1 and SAML2 used in middleware commissioning -->
+    <EntityDescriptor entityID="DummyApp">
+        <SPSSODescriptor
+                protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <AssertionConsumerService isDefault="true" index="0"
+                                      Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/dummyapp/SAML2AssertionConsumer"/>
+            <AssertionConsumerService index="1" Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/dummyapp/SAML11AssertionConsumer"/>
+            <KeyDescriptor use="encryption" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+                <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                    <ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                        <ds:X509Certificate xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                            MIICrDCCAZSgAwIBAgIETJNCVTANBgkqhkiG9w0BAQUFADAYMRYwFAYDVQQDEw1yZW1vdGVzZXJ2
+                            aWNlMB4XDTEwMDkxNzEwMjYyOVoXDTIwMDkxNDEwMjYyOVowGDEWMBQGA1UEAxMNcmVtb3Rlc2Vy
+                            dmljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJkPVM8zCHGzUF0owYR78QpiHfQz
+                            B53Hf9cX1mHfd8FFY23IztEhdDbVf9TV9A/8y7A4l5Md0M0LjSom+iU4fqCRRgq/j6yRHgZ2FjN7
+                            CM0+q4pRFd3tBjXnq4HJ04MWnQRrIQ3RGDQVt5uPzb9fKxeG7lHV4fZ9OiZdFqGr8+xk5+eGvDvN
+                            nu80N9I09BBZUOfxZLI4I8q9ZHzbOXq0SLTEUXsd62Uk2DnGVtfCQzfoLs9j6ypbOeYD5Ff0nebx
+                            Tpe2smcXYrb8Rj1qR/SGMk4PlCD6Islrb5SOYgjsNL1l9d73EF3/iXE7rugODRByw8MjL8ElEAW3
+                            8yuXu4ez5w8CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAIl2A1S32VgMY8yDrc3fU1RLZDhyShKCK
+                            9/KVm66CTaDvNMIsZEoVJPmck43G9TTx/ToVBuXHwyG3BUaADqi6f43TptNckTzgd1rYht/MRq3G
+                            zKoa/byfgEEeVncmnkTirZWOa6D5um5s6rq3S6dsoibsROw0PXvCajjhuDg3ckyz6JzQHirmiBYs
+                            +iFWXwcDZi/rxQovJMaLX+W7rUFOagRFpbnoeivaXmd9KH/km+jzZnSyDDDYtPuEbfCa3AAQCs8W
+                            Q+j7JpYQXvXJotwAqhUlMfHgQ3wUxoH9oo6G/h+XcyYCGX/DpgK29TZBLup3RWe7f5+5VJQHpeDs
+                            VaPe/A==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+                <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+            </KeyDescriptor>
+        </SPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">Northgate</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">Northgate</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://northgatearinso.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>Jim</GivenName>
+            <SurName>Ball</SurName>
+            <EmailAddress>james.ball@northgatearinso.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+    
+    <!-- SoakConsumer used for soak testing the middleware during commissioning, Initially this points to your local
+         middleware.  So, you will be testing your own middleware's performance.  If you want to test some remote 
+         middleware, then get the Locations to point to the right URLs below. -->
+    <EntityDescriptor entityID="SoakConsumer">
+        <SPSSODescriptor
+                protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+            <AssertionConsumerService isDefault="true" index="0"
+                                      Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/SAML2SinkConsumer"/>
+            <AssertionConsumerService index="1" Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"
+                                      Location="http://pc33767.uk.rebushr.com:8090/SAMLWeb/SAML11SinkConsumer"/>
+            <KeyDescriptor use="encryption" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+                <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                    <ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                        <ds:X509Certificate xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                            MIICrDCCAZSgAwIBAgIETJNCVTANBgkqhkiG9w0BAQUFADAYMRYwFAYDVQQDEw1yZW1vdGVzZXJ2
+                            aWNlMB4XDTEwMDkxNzEwMjYyOVoXDTIwMDkxNDEwMjYyOVowGDEWMBQGA1UEAxMNcmVtb3Rlc2Vy
+                            dmljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJkPVM8zCHGzUF0owYR78QpiHfQz
+                            B53Hf9cX1mHfd8FFY23IztEhdDbVf9TV9A/8y7A4l5Md0M0LjSom+iU4fqCRRgq/j6yRHgZ2FjN7
+                            CM0+q4pRFd3tBjXnq4HJ04MWnQRrIQ3RGDQVt5uPzb9fKxeG7lHV4fZ9OiZdFqGr8+xk5+eGvDvN
+                            nu80N9I09BBZUOfxZLI4I8q9ZHzbOXq0SLTEUXsd62Uk2DnGVtfCQzfoLs9j6ypbOeYD5Ff0nebx
+                            Tpe2smcXYrb8Rj1qR/SGMk4PlCD6Islrb5SOYgjsNL1l9d73EF3/iXE7rugODRByw8MjL8ElEAW3
+                            8yuXu4ez5w8CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAIl2A1S32VgMY8yDrc3fU1RLZDhyShKCK
+                            9/KVm66CTaDvNMIsZEoVJPmck43G9TTx/ToVBuXHwyG3BUaADqi6f43TptNckTzgd1rYht/MRq3G
+                            zKoa/byfgEEeVncmnkTirZWOa6D5um5s6rq3S6dsoibsROw0PXvCajjhuDg3ckyz6JzQHirmiBYs
+                            +iFWXwcDZi/rxQovJMaLX+W7rUFOagRFpbnoeivaXmd9KH/km+jzZnSyDDDYtPuEbfCa3AAQCs8W
+                            Q+j7JpYQXvXJotwAqhUlMfHgQ3wUxoH9oo6G/h+XcyYCGX/DpgK29TZBLup3RWe7f5+5VJQHpeDs
+                            VaPe/A==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+                <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+            </KeyDescriptor>
+        </SPSSODescriptor>
+        <Organization>
+            <OrganizationName xml:lang="en">Northgate</OrganizationName>
+            <OrganizationDisplayName xml:lang="en">Northgate</OrganizationDisplayName>
+            <OrganizationURL xml:lang="en">http://northgatearinso.com/</OrganizationURL>
+        </Organization>
+        <ContactPerson contactType="technical">
+            <GivenName>Jim</GivenName>
+            <SurName>Ball</SurName>
+            <EmailAddress>james.ball@northgatearinso.com</EmailAddress>
+        </ContactPerson>
+    </EntityDescriptor>
+</EntitiesDescriptor>

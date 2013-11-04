@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+    <!-- The general SAML middleware application log -->
+    <appender name="SAML_APPLICATION" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/saml_application.log"/>
+        <param name="Append" value="false"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+        </layout>
+    </appender>
+    <!-- The SAML audit logging output for tracing SAML assertion and application entry 
+         success or failure details for audit purposes. -->
+    <appender name="SAML_AUDIT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/saml_audit.log"/>
+        <param name="Append" value="false"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+        </layout>
+    </appender>
+    <!-- Send full debug and above trace to SAML_APPLICATION appender -->
+    <logger name="com.northgatearinso.saml">
+        <level value="DEBUG"/>
+        <appender-ref ref="SAML_APPLICATION" />
+    </logger>
+    <logger name="com.northgatearinso.remote">
+        <level value="DEBUG"/>
+        <appender-ref ref="SAML_APPLICATION" />
+    </logger> 
+    <!-- Send info only for the AuditMessager to SAML_AUDIT appender -->
+    <logger name="com.northgatearinso.saml.impls.standard.common.AuditMessengerImpl">
+        <level value="INFO"/>
+        <appender-ref ref="SAML_AUDIT"/>
+    </logger>
+    <!-- Make sure we log INFO and above by default -->
+    <root>
+        <priority value ="INFO"/> 
+    </root>
+</log4j:configuration>
